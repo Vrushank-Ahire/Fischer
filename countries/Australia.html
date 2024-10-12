@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Australia - Research Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        a {
+            text-decoration: none;
+            color: #2980b9;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #3498db;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+        }
+    </style>
+    <script>
+        function updateStatus(checkbox, id) {
+            localStorage.setItem(id, checkbox.checked);
+        }
+        window.onload = function() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                var status = localStorage.getItem(checkbox.id);
+                if (status === 'true') {
+                    checkbox.checked = true;
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Australia</h1>
+    <table>
+        <tr>
+            <th>Completed</th>
+            <th>University</th>
+            <th>QS Rank</th>
+        </tr>
+        <tr><td><input type="checkbox" id="The University of Melbourne" onclick="updateStatus(this, 'The University of Melbourne')"></td><td><a href="../universities/The_University_of_Melbourne.html">The University of Melbourne</a></td><td>13</td></tr><tr><td><input type="checkbox" id="The University of Sydney" onclick="updateStatus(this, 'The University of Sydney')"></td><td><a href="../universities/The_University_of_Sydney.html">The University of Sydney</a></td><td>18</td></tr><tr><td><input type="checkbox" id="The University of New South Wales (UNSW Sydney)" onclick="updateStatus(this, 'The University of New South Wales (UNSW Sydney)')"></td><td><a href="../universities/The_University_of_New_South_Wales_UNSW_Sydney.html">The University of New South Wales (UNSW Sydney)</a></td><td>19</td></tr><tr><td><input type="checkbox" id="The Australian National University" onclick="updateStatus(this, 'The Australian National University')"></td><td><a href="../universities/The_Australian_National_University.html">The Australian National University</a></td><td>30</td></tr><tr><td><input type="checkbox" id="Monash University" onclick="updateStatus(this, 'Monash University')"></td><td><a href="../universities/Monash_University.html">Monash University</a></td><td>37</td></tr><tr><td><input type="checkbox" id="The University of Queensland" onclick="updateStatus(this, 'The University of Queensland')"></td><td><a href="../universities/The_University_of_Queensland.html">The University of Queensland</a></td><td>40</td></tr><tr><td><input type="checkbox" id="The University of Western Australia" onclick="updateStatus(this, 'The University of Western Australia')"></td><td><a href="../universities/The_University_of_Western_Australia.html">The University of Western Australia</a></td><td>77</td></tr><tr><td><input type="checkbox" id="The University of Adelaide" onclick="updateStatus(this, 'The University of Adelaide')"></td><td><a href="../universities/The_University_of_Adelaide.html">The University of Adelaide</a></td><td>82</td></tr><tr><td><input type="checkbox" id="University of Technology Sydney" onclick="updateStatus(this, 'University of Technology Sydney')"></td><td><a href="../universities/University_of_Technology_Sydney.html">University of Technology Sydney</a></td><td>88</td></tr><tr><td><input type="checkbox" id="RMIT University" onclick="updateStatus(this, 'RMIT University')"></td><td><a href="../universities/RMIT_University.html">RMIT University</a></td><td>123</td></tr><tr><td><input type="checkbox" id="Macquarie University" onclick="updateStatus(this, 'Macquarie University')"></td><td><a href="../universities/Macquarie_University.html">Macquarie University</a></td><td>133</td></tr>
+    </table>
+    <a href="../index.html" class="back-link">Back to Home</a>
+</body>
+</html>

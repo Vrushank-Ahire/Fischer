@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Research Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        a {
+            text-decoration: none;
+            color: #2980b9;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #3498db;
+        }
+        .search-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        #searchInput {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        #searchButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #searchButton:hover {
+            background-color: #2980b9;
+        }
+        #searchResults {
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        function updateStatus(checkbox, id) {
+            localStorage.setItem(id, checkbox.checked);
+        }
+        
+        function searchUniversities() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const universities = [{"University": "Massachusetts Institute of Technology (MIT)", "Country": "United States", "Continent": "Americas", "QS Rank": 1}, {"University": "Imperial College London", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 2}, {"University": "University of Oxford", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 3}, {"University": "Harvard University", "Country": "United States", "Continent": "Americas", "QS Rank": 4}, {"University": "University of Cambridge", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 5}, {"University": "Stanford University", "Country": "United States", "Continent": "Americas", "QS Rank": 6}, {"University": "ETH Zurich - Swiss Federal Institute of Technology", "Country": "Switzerland", "Continent": "Europe", "QS Rank": 7}, {"University": "National University of Singapore (NUS)", "Country": "Singapore", "Continent": "Asia", "QS Rank": 8}, {"University": "UCL", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 9}, {"University": "California Institute of Technology (Caltech)", "Country": "United States", "Continent": "Americas", "QS Rank": 10}, {"University": "University of Pennsylvania", "Country": "United States", "Continent": "Americas", "QS Rank": 11}, {"University": "University of California, Berkeley (UCB)", "Country": "United States", "Continent": "Americas", "QS Rank": 12}, {"University": "The University of Melbourne", "Country": "Australia", "Continent": "Oceania", "QS Rank": 13}, {"University": "Peking University", "Country": "China (Mainland)", "Continent": "Asia", "QS Rank": 14}, {"University": "Nanyang Technological University, Singapore (NTU)", "Country": "Singapore", "Continent": "Asia", "QS Rank": 15}, {"University": "Cornell University", "Country": "United States", "Continent": "Americas", "QS Rank": 16}, {"University": "The University of Hong Kong", "Country": "Hong Kong SAR", "Continent": "Asia", "QS Rank": 17}, {"University": "The University of Sydney", "Country": "Australia", "Continent": "Oceania", "QS Rank": 18}, {"University": "The University of New South Wales (UNSW Sydney)", "Country": "Australia", "Continent": "Oceania", "QS Rank": 19}, {"University": "Tsinghua University", "Country": "China (Mainland)", "Continent": "Asia", "QS Rank": 20}, {"University": "University of Chicago", "Country": "United States", "Continent": "Americas", "QS Rank": 21}, {"University": "Princeton University", "Country": "United States", "Continent": "Americas", "QS Rank": 22}, {"University": "Yale University", "Country": "United States", "Continent": "Americas", "QS Rank": 23}, {"University": "Universit\u00e9 PSL", "Country": "France", "Continent": "Europe", "QS Rank": 24}, {"University": "University of Toronto", "Country": "Canada", "Continent": "Americas", "QS Rank": 25}, {"University": "EPFL", "Country": "Switzerland", "Continent": "Europe", "QS Rank": 26}, {"University": "The University of Edinburgh", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 27}, {"University": "Technical University of Munich", "Country": "Germany", "Continent": "Europe", "QS Rank": 28}, {"University": "McGill University", "Country": "Canada", "Continent": "Americas", "QS Rank": 29}, {"University": "The Australian National University", "Country": "Australia", "Continent": "Oceania", "QS Rank": 30}, {"University": "Seoul National University", "Country": "South Korea", "Continent": "Asia", "QS Rank": 31}, {"University": "Johns Hopkins University", "Country": "United States", "Continent": "Americas", "QS Rank": 32}, {"University": "The University of Tokyo", "Country": "Japan", "Continent": "Asia", "QS Rank": 32}, {"University": "Columbia University", "Country": "United States", "Continent": "Americas", "QS Rank": 34}, {"University": "The University of Manchester", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 34}, {"University": "The Chinese University of Hong Kong (CUHK)", "Country": "Hong Kong SAR", "Continent": "Asia", "QS Rank": 36}, {"University": "Monash University", "Country": "Australia", "Continent": "Oceania", "QS Rank": 37}, {"University": "University of British Columbia", "Country": "Canada", "Continent": "Americas", "QS Rank": 38}, {"University": "Fudan University", "Country": "China (Mainland)", "Continent": "Asia", "QS Rank": 39}, {"University": "King's College London", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 40}, {"University": "The University of Queensland", "Country": "Australia", "Continent": "Oceania", "QS Rank": 40}, {"University": "University of California, Los Angeles (UCLA)", "Country": "United States", "Continent": "Americas", "QS Rank": 42}, {"University": "New York University (NYU)", "Country": "United States", "Continent": "Americas", "QS Rank": 43}, {"University": "University of Michigan-Ann Arbor", "Country": "United States", "Continent": "Americas", "QS Rank": 44}, {"University": "Shanghai Jiao Tong University", "Country": "China (Mainland)", "Continent": "Asia", "QS Rank": 45}, {"University": "Institut Polytechnique de Paris", "Country": "France", "Continent": "Europe", "QS Rank": 46}, {"University": "The Hong Kong University of Science and Technology", "Country": "Hong Kong SAR", "Continent": "Asia", "QS Rank": 47}, {"University": "Zhejiang University", "Country": "China (Mainland)", "Continent": "Asia", "QS Rank": 47}, {"University": "Delft University of Technology", "Country": "Netherlands", "Continent": "Europe", "QS Rank": 49}, {"University": "Kyoto University", "Country": "Japan", "Continent": "Asia", "QS Rank": 50}, {"University": "Northwestern University", "Country": "United States", "Continent": "Americas", "QS Rank": 50}, {"University": "The London School of Economics and Political Science (LSE)", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 50}, {"University": "KAIST - Korea Advanced Institute of Science & Technology", "Country": "South Korea", "Continent": "Asia", "QS Rank": 53}, {"University": "University of Bristol", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 54}, {"University": "University of Amsterdam", "Country": "Netherlands", "Continent": "Europe", "QS Rank": 55}, {"University": "Yonsei University", "Country": "South Korea", "Continent": "Asia", "QS Rank": 56}, {"University": "The Hong Kong Polytechnic University", "Country": "Hong Kong SAR", "Continent": "Asia", "QS Rank": 57}, {"University": "Carnegie Mellon University", "Country": "United States", "Continent": "Americas", "QS Rank": 58}, {"University": "Ludwig-Maximilians-Universit\u00e4t M\u00fcnchen", "Country": "Germany", "Continent": "Europe", "QS Rank": 59}, {"University": "Universiti Malaya (UM)", "Country": "Malaysia", "Continent": "Asia", "QS Rank": 60}, {"University": "Duke University", "Country": "United States", "Continent": "Americas", "QS Rank": 61}, {"University": "City University of Hong Kong", "Country": "Hong Kong SAR", "Continent": "Asia", "QS Rank": 62}, {"University": "Sorbonne University", "Country": "France", "Continent": "Europe", "QS Rank": 63}, {"University": "The University of Auckland", "Country": "New Zealand", "Continent": "Oceania", "QS Rank": 65}, {"University": "University of Texas at Austin", "Country": "United States", "Continent": "Americas", "QS Rank": 66}, {"University": "Korea University", "Country": "South Korea", "Continent": "Asia", "QS Rank": 67}, {"University": "The University of Warwick", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 69}, {"University": "University of Illinois at Urbana-Champaign", "Country": "United States", "Continent": "Americas", "QS Rank": 69}, {"University": "University of California, San Diego (UCSD)", "Country": "United States", "Continent": "Americas", "QS Rank": 72}, {"University": "Universit\u00e9 Paris-Saclay", "Country": "France", "Continent": "Europe", "QS Rank": 73}, {"University": "KTH Royal Institute of Technology", "Country": "Sweden", "Continent": "Europe", "QS Rank": 74}, {"University": "Lund University", "Country": "Sweden", "Continent": "Europe", "QS Rank": 75}, {"University": "University of Washington", "Country": "United States", "Continent": "Americas", "QS Rank": 76}, {"University": "The University of Western Australia", "Country": "Australia", "Continent": "Oceania", "QS Rank": 77}, {"University": "University of Glasgow", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 78}, {"University": "Brown University", "Country": "United States", "Continent": "Americas", "QS Rank": 79}, {"University": "University of Birmingham", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 80}, {"University": "University of Southampton", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 80}, {"University": "The University of Adelaide", "Country": "Australia", "Continent": "Oceania", "QS Rank": 82}, {"University": "University of Leeds", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 82}, {"University": "Ruprecht-Karls-Universit\u00e4t Heidelberg", "Country": "Germany", "Continent": "Europe", "QS Rank": 84}, {"University": "Tokyo Institute of Technology (Tokyo Tech)", "Country": "Japan", "Continent": "Asia", "QS Rank": 84}, {"University": "Osaka University", "Country": "Japan", "Continent": "Asia", "QS Rank": 86}, {"University": "Trinity College Dublin, The University of Dublin", "Country": "Ireland", "Continent": "Europe", "QS Rank": 87}, {"University": "University of Technology Sydney", "Country": "Australia", "Continent": "Oceania", "QS Rank": 88}, {"University": "Durham University", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 89}, {"University": "Pennsylvania State University", "Country": "United States", "Continent": "Americas", "QS Rank": 89}, {"University": "Purdue University", "Country": "United States", "Continent": "Americas", "QS Rank": 89}, {"University": "University of Alberta", "Country": "Canada", "Continent": "Americas", "QS Rank": 96}, {"University": "Freie Universitaet Berlin", "Country": "Germany", "Continent": "Europe", "QS Rank": 97}, {"University": "Pohang University of Science And Technology (POSTECH)", "Country": "South Korea", "Continent": "Asia", "QS Rank": 98}, {"University": "RWTH Aachen University", "Country": "Germany", "Continent": "Europe", "QS Rank": 99}, {"University": "King Fahd University of Petroleum & Minerals", "Country": "Saudi Arabia", "Continent": "Asia", "QS Rank": 101}, {"University": "KIT, Karlsruhe Institute of Technology", "Country": "Germany", "Continent": "Europe", "QS Rank": 102}, {"University": "Uppsala University", "Country": "Sweden", "Continent": "Europe", "QS Rank": 103}, {"University": "University of St Andrews", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 104}, {"University": "The University of Sheffield", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 105}, {"University": "Utrecht University", "Country": "Netherlands", "Continent": "Europe", "QS Rank": 105}, {"University": "Tohoku University", "Country": "Japan", "Continent": "Asia", "QS Rank": 107}, {"University": "University of Nottingham", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 108}, {"University": "University of Zurich", "Country": "Switzerland", "Continent": "Europe", "QS Rank": 109}, {"University": "Politecnico di Milano", "Country": "Italy", "Continent": "Europe", "QS Rank": 111}, {"University": "Boston University", "Country": "United States", "Continent": "Americas", "QS Rank": 108}, {"University": "Aalto University", "Country": "Finland", "Continent": "Europe", "QS Rank": 113}, {"University": "Georgia Institute of Technology", "Country": "United States", "Continent": "Americas", "QS Rank": 114}, {"University": "University of Waterloo", "Country": "Canada", "Continent": "Americas", "QS Rank": 115}, {"University": "University of Wisconsin-Madison", "Country": "United States", "Continent": "Americas", "QS Rank": 116}, {"University": "University of Helsinki", "Country": "Finland", "Continent": "Europe", "QS Rank": 117}, {"University": "Indian Institute of Technology Bombay (IITB)", "Country": "India", "Continent": "Asia", "QS Rank": 118}, {"University": "Queen Mary University of London", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 120}, {"University": "Western University", "Country": "Canada", "Continent": "Americas", "QS Rank": 120}, {"University": "Qatar University", "Country": "Qatar", "Continent": "Asia", "QS Rank": 122}, {"University": "RMIT University", "Country": "Australia", "Continent": "Oceania", "QS Rank": 123}, {"University": "Sungkyunkwan University(SKKU)", "Country": "South Korea", "Continent": "Asia", "QS Rank": 123}, {"University": "University of Southern California", "Country": "United States", "Continent": "Americas", "QS Rank": 125}, {"University": "Humboldt-Universit\u00e4t zu Berlin", "Country": "Germany", "Continent": "Europe", "QS Rank": 126}, {"University": "University College Dublin", "Country": "Ireland", "Continent": "Europe", "QS Rank": 126}, {"University": "Stockholm University", "Country": "Sweden", "Continent": "Europe", "QS Rank": 128}, {"University": "Newcastle University", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 129}, {"University": "University of California, Davis", "Country": "United States", "Continent": "Americas", "QS Rank": 130}, {"University": "University of Basel", "Country": "Switzerland", "Continent": "Europe", "QS Rank": 131}, {"University": "Sapienza University of Rome", "Country": "Italy", "Continent": "Europe", "QS Rank": 132}, {"University": "Alma Mater Studiorum - University of Bologna", "Country": "Italy", "Continent": "Europe", "QS Rank": 133}, {"University": "Macquarie University", "Country": "Australia", "Continent": "Oceania", "QS Rank": 133}, {"University": "University of Science and Technology of China", "Country": "China (Mainland)", "Continent": "Asia", "QS Rank": 133}, {"University": "Eindhoven University of Technology", "Country": "Netherlands", "Continent": "Europe", "QS Rank": 136}, {"University": "Universiti Kebangsaan Malaysia (UKM)", "Country": "Malaysia", "Continent": "Asia", "QS Rank": 138}, {"University": "Chalmers University of Technology", "Country": "Sweden", "Continent": "Europe", "QS Rank": 139}, {"University": "Lancaster University", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 141}, {"University": "Leiden University", "Country": "Netherlands", "Continent": "Europe", "QS Rank": 141}, {"University": "Rice University", "Country": "United States", "Continent": "Americas", "QS Rank": 141}, {"University": "Nanjing University", "Country": "China (Mainland)", "Continent": "Asia", "QS Rank": 145}, {"University": "Universiti Sains Malaysia (USM)", "Country": "Malaysia", "Continent": "Asia", "QS Rank": 146}, {"University": "Technische Universit\u00e4t Berlin (TU Berlin)", "Country": "Germany", "Continent": "Europe", "QS Rank": 147}, {"University": "Universiti Putra Malaysia (UPM)", "Country": "Malaysia", "Continent": "Asia", "QS Rank": 148}, {"University": "King Abdulaziz University (KAU)", "Country": "Saudi Arabia", "Continent": "Asia", "QS Rank": 149}, {"University": "Indian Institute of Technology Delhi (IITD)", "Country": "India", "Continent": "Asia", "QS Rank": 150}, {"University": "University of Bath", "Country": "United Kingdom", "Continent": "Europe", "QS Rank": 150}];
+            const results = universities.filter(uni =>
+                Object.values(uni).some(value => 
+                    value.toString().toLowerCase().includes(searchInput)
+                )
+            );
+            displaySearchResults(results);
+        }
+        
+        function displaySearchResults(results) {
+            const resultsContainer = document.getElementById('searchResults');
+            if (results.length === 0) {
+                resultsContainer.innerHTML = '<p>No results found.</p>';
+                return;
+            }
+            let html = '<h2>Search Results</h2><table><tr><th>University</th><th>Country</th><th>Continent</th><th>QS Rank</th></tr>';
+            results.forEach(uni => {
+                html += `<tr>
+                    <td><a href="universities/${uni.University.replace(/ /g, '_').replace(/\(/g, '').replace(/\)/g, '')}.html">${uni.University}</a></td>
+                    <td>${uni.Country}</td>
+                    <td>${uni.Continent}</td>
+                    <td>${uni["QS Rank"]}</td>
+
+                </tr>`;
+            });
+            html += '</table>';
+            resultsContainer.innerHTML = html;
+        }
+        
+        window.onload = function() {
+            var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(function(checkbox) {
+                var status = localStorage.getItem(checkbox.id);
+                if (status === 'true') {
+                    checkbox.checked = true;
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Research Application</h1>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search universities, countries, or continents...">
+        <button id="searchButton" onclick="searchUniversities()">Search</button>
+    </div>
+    <div id="searchResults"></div>
+    <h2>Continents</h2>
+    <table>
+        <tr>
+            <th>Completed</th>
+            <th>Continent</th>
+        </tr>
+        <tr><td><input type="checkbox" id="Europe" onclick="updateStatus(this, 'Europe')"></td><td><a href="countries/Europe.html">Europe</a></td></tr><tr><td><input type="checkbox" id="Asia" onclick="updateStatus(this, 'Asia')"></td><td><a href="countries/Asia.html">Asia</a></td></tr><tr><td><input type="checkbox" id="Americas" onclick="updateStatus(this, 'Americas')"></td><td><a href="countries/Americas.html">Americas</a></td></tr><tr><td><input type="checkbox" id="Oceania" onclick="updateStatus(this, 'Oceania')"></td><td><a href="countries/Oceania.html">Oceania</a></td></tr>
+    </table>
+</body>
+</html>
